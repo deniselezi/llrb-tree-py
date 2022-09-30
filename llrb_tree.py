@@ -1,8 +1,8 @@
 class Node():
     """
     Represents a node in a left-leaning red-black tree.
-	If multiple nodes have the same key, their values are all stored in a
-	single node as a list.
+    If multiple nodes have the same key, their values are all stored in a
+    single node as a list.
     """
     def __init__(self, key, value, coloured):
         self.key = key
@@ -114,21 +114,21 @@ class LLRBTree():
         return traversed
 
     def height(self, root):
-		# return the height of tallest branch in the tree
+        # return the height of tallest branch in the tree
         if root is None:
             return 0
         else:
             return max(self.height(root.left), self.height(root.right)) + 1
     
     def min(self, node):
-		# returns the key and value of the node with the smallest key in the tree
+        # returns the key and value of the node with the smallest key in the tree
         if node.left:
             return self.min(node.left)
         else:
             return node.key, node.value
     
     def max(self, node):
-		# returns the key and value of the node with the largest key in the tree
+        # returns the key and value of the node with the largest key in the tree
         if node.right:
             return self.max(node.right)
         else:
@@ -136,7 +136,7 @@ class LLRBTree():
 
     def floor(self, node, threshold, current_floor = None):
         # returns the key and value of the node with the
-		# largest key such that the key <= threshold
+        # largest key such that the key <= threshold
         if threshold == node.key:
             return node.key, node.value
         elif threshold < node.key and node.left:
@@ -152,7 +152,7 @@ class LLRBTree():
     
     def ceiling(self, node, threshold, current_ceiling = None):
         # returns the key and value of the node with the
-		# smallest key such that the key >= threshold
+        # smallest key such that the key >= threshold
         if threshold == node.key:
             return node.key, node.value
         elif threshold < node.key and node.left:
@@ -167,8 +167,8 @@ class LLRBTree():
             return current_ceiling.key, current_ceiling.value
     
     def range(self, node, start, end):
-		# returns a list of all nodes with keys between the start 
-		# and end values
+        # returns a list of all nodes with keys between the start 
+        # and end values
         traversed = []
         if not node:
             return traversed
@@ -182,21 +182,20 @@ class LLRBTree():
             traversed = traversed + self.range(node.right, start, end)
         return traversed
 
-
 if __name__ == "__main__":
-	rbtree = LLRBTree(20, "Standing")
+    rbtree = LLRBTree(20, "Standing")
 
-	rbtree.insert(rbtree.root, 15, "here,")
-	rbtree.insert(rbtree.root, 25, "I realize")
-	rbtree.insert(rbtree.root, 18, "you are")
-	rbtree.insert(rbtree.root, 13, "just like me")
-	rbtree.insert(rbtree.root, 228, "trying to make history")
+    rbtree.insert(rbtree.root, 15, "here,")
+    rbtree.insert(rbtree.root, 25, "I realize")
+    rbtree.insert(rbtree.root, 18, "you are")
+    rbtree.insert(rbtree.root, 13, "just like me")
+    rbtree.insert(rbtree.root, 228, "trying to make history")
 
-	print(rbtree.ceiling(rbtree.root, 20))
-	print(rbtree.floor(rbtree.root, 16))
+    print(rbtree.ceiling(rbtree.root, 20))
+    print(rbtree.floor(rbtree.root, 16))
 
-	for i in rbtree.traverse(rbtree.root):
-		print(i)
+    for i in rbtree.traverse(rbtree.root):
+        print(i)
 
-	for i in (rbtree.range(rbtree.root, 14, 30)):
-		print(i)
+    for i in (rbtree.range(rbtree.root, 14, 30)):
+        print(i)
